@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botwe Emmanuel — IT Support &amp; Network Systems</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg: #0A0E17;
+    --panel: #111828;
+    --panel-2: #151E30;
+    --line: #232E45;
+    --text: #E7ECF6;
+    --muted: #8A96AE;
+    --accent: #3FE0A5;
+    --accent-dim: #23735A;
+    --amber: #F0A94E;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  ::selection{ background: var(--accent); color: #05130E; }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(10,14,23,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 28px; max-width: 980px; margin:0 auto;
+    font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+  }
+  .brand{ color: var(--text); font-weight:600; letter-spacing:0.02em; }
+  .brand span{ color: var(--accent); }
+  .status-pill{
+    display:flex; align-items:center; gap:8px;
+    border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px;
+    background: var(--panel);
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 rgba(63,224,165,0.6);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(63,224,165,0.55); }
+    70%{ box-shadow: 0 0 0 7px rgba(63,224,165,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(63,224,165,0); }
+  }
+  .topbar-links{ display:flex; gap:20px; }
+  .topbar-links a:hover{ color: var(--accent); }
+  @media (max-width: 640px){ .topbar-links{ display:none; } }
+
+  /* ---------- hero / console ---------- */
+  .hero{ padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+  .console{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .console-bar{
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 14px; border-bottom: 1px solid var(--line);
+    background: var(--panel-2);
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+  }
+  .console-bar .chip{ width:9px; height:9px; border-radius:50%; background:#3A465E; }
+  .console-bar .path{ margin-left: 8px; }
+  .console-body{ padding: 26px 24px 30px; font-family: var(--mono); font-size: 13.5px; }
+  .console-line{ color: var(--muted); margin-bottom: 6px; }
+  .console-line .prompt{ color: var(--accent); }
+  .type-name{
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(32px, 6vw, 54px);
+    letter-spacing: -0.01em;
+    margin: 10px 0 6px;
+    color: var(--text);
+  }
+  .type-role{
+    font-family: var(--mono);
+    color: var(--amber);
+    font-size: 14.5px;
+    margin-bottom: 20px;
+  }
+  .hero-summary{
+    max-width: 640px; color: var(--muted); font-size: 15.5px; margin-bottom: 22px;
+  }
+  .contact-row{
+    display:flex; flex-wrap: wrap; gap: 10px 22px;
+    font-family: var(--mono); font-size: 13px; color: var(--text);
+    padding-top: 16px; border-top: 1px dashed var(--line);
+  }
+  .contact-row a:hover{ color: var(--accent); }
+  .contact-row .label{ color: var(--muted); margin-right: 4px; }
+
+  /* ---------- section headers ---------- */
+  section{ padding: 52px 0; border-bottom: 1px solid var(--line); }
+  .sec-head{
+    display:flex; align-items:baseline; gap: 12px;
+    margin-bottom: 26px;
+  }
+  .sec-tag{
+    font-family: var(--mono); font-size: 11.5px; color: var(--accent);
+    border: 1px solid var(--accent-dim); padding: 3px 9px; border-radius: 4px;
+    letter-spacing: 0.06em;
+  }
+  .sec-title{ font-size: 22px; font-weight: 700; }
+  .sec-sub{ font-family: var(--mono); font-size: 12px; color: var(--muted); margin-left: auto; }
+  @media (max-width: 640px){ .sec-sub{ display:none; } }
+
+  /* ---------- strengths grid ---------- */
+  .grid{
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  }
+  @media (max-width: 760px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+  .cap{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 14px;
+    font-size: 13.5px;
+    display:flex; align-items:center; gap:10px;
+    transition: border-color .2s, transform .2s;
+  }
+  .cap:hover{ border-color: var(--accent-dim); transform: translateY(-2px); }
+  .cap .idx{ font-family: var(--mono); color: var(--accent); font-size: 11px; }
+
+  /* ---------- experience log ---------- */
+  .log{ position: relative; padding-left: 26px; }
+  .log::before{
+    content:""; position:absolute; left: 6px; top: 6px; bottom: 6px;
+    width: 1px; background: var(--line);
+  }
+  .entry{ position: relative; margin-bottom: 34px; }
+  .entry:last-child{ margin-bottom: 0; }
+  .entry::before{
+    content:""; position:absolute; left: -26px; top: 5px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--accent);
+  }
+  .entry-head{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap: 8px 14px;
+    margin-bottom: 6px;
+  }
+  .entry-role{ font-weight: 700; font-size: 16.5px; }
+  .entry-org{ color: var(--amber); font-size: 13.5px; }
+  .entry-meta{
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+    margin-left: auto;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+  }
+  .entry ul{ list-style: none; margin-top: 8px; }
+  .entry li{
+    color: var(--muted); font-size: 14px; margin-bottom: 6px;
+    padding-left: 16px; position: relative;
+  }
+  .entry li::before{
+    content:"›"; position:absolute; left:0; color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  /* ---------- technical skills ---------- */
+  .stack{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+  }
+  @media (max-width: 640px){ .stack{ grid-template-columns: 1fr; } }
+  .stack-card{
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px 18px;
+  }
+  .stack-card h4{
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+    letter-spacing: 0.06em; margin-bottom: 10px; text-transform: uppercase;
+  }
+  .tag-row{ display:flex; flex-wrap:wrap; gap: 6px; }
+  .tag{
+    font-family: var(--mono); font-size: 12px;
+    background: var(--panel-2); border: 1px solid var(--line);
+    color: var(--text); padding: 4px 9px; border-radius: 5px;
+  }
+
+  /* ---------- education ---------- */
+  .edu-item{
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px;
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+  }
+  .edu-item:last-child{ border-bottom:none; }
+  .edu-school{ font-weight:600; font-size: 15px; }
+  .edu-detail{ color: var(--muted); font-size: 13.5px; }
+  .edu-date{ font-family: var(--mono); font-size: 12px; color: var(--accent); white-space:nowrap; }
+
+  /* ---------- footer ---------- */
+  footer{ padding: 40px 0 60px; }
+  .foot-grid{
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap: 20px;
+    align-items:flex-end;
+  }
+  .foot-note{ font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+  .foot-cta{
+    font-family: var(--mono); font-size: 13px;
+    border: 1px solid var(--accent-dim); color: var(--accent);
+    padding: 10px 18px; border-radius: 6px;
+    transition: background .2s, color .2s;
+  }
+  .foot-cta:hover{ background: var(--accent); color: #05130E; }
+
+  .reveal{ opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">botwe<span>@</span>emmanuel</div>
+    <div class="topbar-links">
+      <a href="#experience">experience</a>
+      <a href="#skills">skills</a>
+      <a href="#education">education</a>
+    </div>
+    <div class="status-pill"><span class="dot"></span> open to work</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="console reveal">
+      <div class="console-bar">
+        <span class="chip"></span><span class="chip"></span><span class="chip"></span>
+        <span class="path">~/botwe-emmanuel/profile.log</span>
+      </div>
+      <div class="console-body">
+        <div class="console-line"><span class="prompt">$</span> whoami</div>
+        <div class="type-name">Botwe Emmanuel</div>
+        <div class="type-role">IT SUPPORT &amp; NETWORK SYSTEMS PROFESSIONAL — ACCRA, GHANA</div>
+        <div class="hero-summary">
+          Customer-focused IT professional combining strong technical troubleshooting with a genuine commitment to service excellence — network administration, systems support, and hardware repair across research, financial, and retail environments. I turn frustrating technical issues into positive experiences by listening carefully, explaining solutions in plain language, and following up to ensure lasting satisfaction.
+        </div>
+        <div class="contact-row">
+          <span><span class="label">mail</span><a href="mailto:botweemmanuel@gmail.com">botweemmanuel@gmail.com</a></span>
+          <span><span class="label">call</span><a href="tel:+233249779201">+233 24 977 9201</a></span>
+          <span><span class="label">whatsapp</span><a href="https://wa.me/233509301899" target="_blank" rel="noopener">+233 50 930 1899</a></span>
+          <span><span class="label">loc</span>Accra, Ghana</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="strengths">
+    <div class="sec-head">
+      <span class="sec-tag">01</span>
+      <h2 class="sec-title">Core Strengths</h2>
+      <span class="sec-sub">// capability index</span>
+    </div>
+    <div class="grid reveal">
+      <div class="cap"><span class="idx">01</span>Customer-Centered Technical Support</div>
+      <div class="cap"><span class="idx">02</span>Network &amp; Systems Administration</div>
+      <div class="cap"><span class="idx">03</span>Help Desk &amp; Ticket Resolution (L1/L2)</div>
+      <div class="cap"><span class="idx">04</span>Patience &amp; Active Listening</div>
+      <div class="cap"><span class="idx">05</span>OS &amp; Office Tools</div>
+      <div class="cap"><span class="idx">06</span>Security &amp; Compliance Awareness</div>
+      <div class="cap"><span class="idx">07</span>Time Management &amp; Multitasking</div>
+      <div class="cap"><span class="idx">08</span>Team Collaboration &amp; Adaptability</div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <span class="sec-tag">02</span>
+      <h2 class="sec-title">Experience Log</h2>
+      <span class="sec-sub">// most recent first</span>
+    </div>
+    <div class="log reveal">
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">IT Technician</span>
+          <span class="entry-org">Ultimate Supplies Limited — Accra-Adabraka, Ghana</span>
+          <span class="entry-meta">CURRENT</span>
+        </div>
+        <ul>
+          <li>First point of contact for customers bringing in multipurpose printers and other equipment for repair, understanding each issue before diagnosing it</li>
+          <li>Repair and maintain multipurpose printers and related hardware, balancing technical accuracy with clear, friendly status updates</li>
+          <li>Support walk-in and phone customers with hardware and software issues, building repeat trust through dependable follow-through</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">National Service Personnel — IT Division</span>
+          <span class="entry-org">Cocoa Research Institute of Ghana (CRIG) — Koforidua-Tafo, Ghana</span>
+          <span class="entry-meta">SEP 2024 – AUG 2025</span>
+        </div>
+        <ul>
+          <li>Delivered Level 1 &amp; 2 technical support to 70+ research staff via in-person and phone channels, resolving connectivity, hardware, and software issues</li>
+          <li>Managed network hardware and software, assisting with switch and router configuration to minimize service disruptions</li>
+          <li>Handled Windows OS and Microsoft Office installation, activation, and troubleshooting, walking users through changes for lasting confidence</li>
+          <li>Maintained endpoint security, antivirus solutions, and data backup procedures to protect staff data</li>
+          <li>Created user-friendly awareness materials on data protection, making technical guidance accessible to non-technical staff</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">IT Intern — Accounts Division &amp; Stores</span>
+          <span class="entry-org">Bunsu Cooperation Credit Union — Koforidua-Bunsu, Ghana</span>
+          <span class="entry-meta">OCT – DEC 2021</span>
+        </div>
+        <ul>
+          <li>Applied IT compliance and security knowledge to financial data management, ensuring accurate handling of member and institutional records</li>
+          <li>Performed precise, timely data entry for inventory and financial records with discretion and reliability</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">IT Intern</span>
+          <span class="entry-org">Cocoa Research Institute of Ghana (CRIG) — Koforidua-Tafo, Ghana</span>
+          <span class="entry-meta">OCT – DEC 2022</span>
+        </div>
+        <ul>
+          <li>Assisted senior officers with network performance monitoring and preventative maintenance</li>
+          <li>Participated in troubleshooting sessions for connectivity and security issues with a calm, solutions-focused approach</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <span class="sec-tag">03</span>
+      <h2 class="sec-title">Technical Stack</h2>
+      <span class="sec-sub">// tools &amp; protocols</span>
+    </div>
+    <div class="stack reveal">
+      <div class="stack-card">
+        <h4>Networking</h4>
+        <div class="tag-row">
+          <span class="tag">TCP/IP</span><span class="tag">DNS</span><span class="tag">DHCP</span>
+          <span class="tag">Switch/Router Config</span><span class="tag">Network Monitoring</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h4>Operating Systems</h4>
+        <div class="tag-row">
+          <span class="tag">Windows Install/Activation</span><span class="tag">Basic Linux</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h4>Security</h4>
+        <div class="tag-row">
+          <span class="tag">Endpoint Protection</span><span class="tag">Antivirus</span><span class="tag">Backups</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h4>Tools</h4>
+        <div class="tag-row">
+          <span class="tag">MS Word</span><span class="tag">Excel</span><span class="tag">PowerPoint</span><span class="tag">Wireshark</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head">
+      <span class="sec-tag">04</span>
+      <h2 class="sec-title">Education &amp; Activities</h2>
+      <span class="sec-sub">// credentials</span>
+    </div>
+    <div class="reveal">
+      <div class="edu-item">
+        <div>
+          <div class="edu-school">Koforidua Technical University (KTU)</div>
+          <div class="edu-detail">Bachelor's in Computer Science (Top-up)</div>
+        </div>
+        <div class="edu-date">Jan 2021 – Oct 2024</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-school">Koforidua Technical University (KTU)</div>
+          <div class="edu-detail">HND in Computer Network Management</div>
+        </div>
+        <div class="edu-date">Jan 2021 – Oct 2024</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-school">Oyoko Methodist Senior High School</div>
+          <div class="edu-detail">Secondary Education</div>
+        </div>
+        <div class="edu-date">Jan 2018 – Oct 2021</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-school">University Networking Club</div>
+          <div class="edu-detail">Active member — workshops and seminars on advanced networking at GAPOHA, the Airport, and NITA, building both technical depth and confidence presenting to a group</div>
+        </div>
+        <div class="edu-date">Extracurricular</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid reveal">
+      <div>
+        <div class="foot-note">REFERENCES.available_on_request()</div>
+        <div class="foot-note" style="margin-top:4px;">Football • Reading • Music</div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="foot-cta" href="tel:+233249779201">→ call</a>
+        <a class="foot-cta" href="https://wa.me/233509301899" target="_blank" rel="noopener">→ whatsapp</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  items.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
